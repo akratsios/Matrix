@@ -3,7 +3,7 @@ from draw import *
 from math import pi
 
 screen = new_screen()
-color = [ 0, 255, 0 ]
+color = [ 250, 100, 0 ]
 
 
 
@@ -15,26 +15,31 @@ x = XRES/2
 y = YRES/2
 r = 100
 
-for a in xrange(720):
-    matrix = [[],
-              [],
-              [],
-              []]
-    add_edge(matrix, x, y+r+r, 0, x, y+r+r, 0)
-    theta = a*pi/360
-    trans_matrix = matrix_mult(
-        matrix_mult(make_translate(x,y+r,0), make_rotZ(theta)),
-        make_translate(-x,-y-r,0))
-    matrix = matrix_mult(trans_matrix, matrix)
-    edge[0].extend(matrix[0])
-    edge[1].extend(matrix[1])
-    edge[2].extend(matrix[2])
-    edge[3].extend(matrix[3])
+matrix = [[],[], [],[]]
+add_edge(matrix, 20, 20, 1, 20, 50, 1)
+add_edge(matrix, 20, 50, 1, 50, 50, 1)
+add_edge(matrix, 50, 50, 1, 50, 20, 1)
+add_edge(matrix, 50, 20, 1, 20, 20, 1)
+
+add_edge(matrix, 200, 200, 1, 200, 250, 1)
+add_edge(matrix, 200, 250, 1, 250, 250, 1)
+add_edge(matrix, 250, 250, 1, 250, 200, 1)
+add_edge(matrix, 250, 200, 1, 200, 200, 1)
+
+add_edge(matrix, 100, 100, 1, 100, 250, 1)
+add_edge(matrix, 100, 250, 1, 250, 250, 1)
+add_edge(matrix, 250, 250, 1, 250, 100, 1)
+add_edge(matrix, 250, 100, 1, 100, 100, 1)
+
+edge[0].extend(matrix[0])
+edge[1].extend(matrix[1])
+edge[2].extend(matrix[2])
+edge[3].extend(matrix[3])
 
     
-for a in xrange(6):
+for n in xrange(50):
     trans_matrix = matrix_mult(
-        matrix_mult(make_translate(x,y,0), make_rotZ(pi/3)),
+        matrix_mult(make_translate(x,y,0), make_rotZ(pi/4)),
         make_translate(-x,-y,0))
     edge = matrix_mult(trans_matrix, edge)
     draw_lines(edge, screen, color)
